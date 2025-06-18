@@ -1,0 +1,51 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: gateway-service
+  # Redis配置
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # 启用服务发现
+          enabled: true
+          lower-case-service-id: true
+      # 路由已通过RateLimiterFilterConfig以编程方式定义
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+
+# Actuator配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+# 日志配置
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+
+# Resilience4j限流配置
+resilience4j:
+  ratelimiter:
+    instances:
+      userRateLimiter:
+        limitForPeriod: 1  # 单位时间内允许的请求数
+        limitRefreshPeriod: 1s  # 单位时间
+        timeoutDuration: 500ms  # 等待获取令牌的超时时间
+      orderRateLimiter:
+        limitForPeriod: 2
+        limitRefreshPeriod: 1s
+        timeoutDuration: 500ms
