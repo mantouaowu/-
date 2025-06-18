@@ -1,0 +1,4 @@
+org\example\consumer\ServiceConsumerApplication.class
+org\example\consumer\feign\HelloService.class
+org\example\consumer\controller\ConsumerController.class
+org\example\consumer\controller\HelloController.class
