@@ -1,0 +1,83 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: service-consumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+# OpenFeign配置
+feign:
+  circuitbreaker:
+    enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 5000
+        read-timeout: 5000
+
+# Resilience4j 断路器配置
+resilience4j:
+  # 断路器配置
+  circuitbreaker:
+    instances:
+      # 断路器实例A配置
+      circuitBreakerA:
+        failure-rate-threshold: 30 # OPEN状态的失败率阈值为30%
+        sliding-window-type: TIME_BASED # 滑动窗口类型为时间窗口型
+        sliding-window-size: 10 # 滑动窗口长度为10秒
+        minimum-number-of-calls: 5 # 滑动窗口内最小请求个数为5
+        wait-duration-in-open-state: 5s # 断路器能自动从OPEN状态变为HALF_OPEN状态，默认等待时间为5秒
+        permitted-number-of-calls-in-half-open-state: 3 # 断路器HALF_OPEN状态时允许测试响应能力的请求数为3
+        register-health-indicator: true
+        
+      # 断路器实例B配置
+      circuitBreakerB:
+        failure-rate-threshold: 50 # OPEN状态的失败率阈值为50%
+        slow-call-rate-threshold: 30 # OPEN状态的慢调用阈值为30%
+        slow-call-duration-threshold: 2s # 断路器判断是否为慢调用的时间阈值为2秒
+        sliding-window-type: TIME_BASED # 滑动窗口类型为时间窗口型
+        sliding-window-size: 10 # 滑动窗口长度为10秒
+        minimum-number-of-calls: 5 # 滑动窗口内最小请求个数为5
+        wait-duration-in-open-state: 5s # 断路器能自动从OPEN状态变为HALF_OPEN状态，默认等待时间为5秒
+        permitted-number-of-calls-in-half-open-state: 3 # 断路器HALF_OPEN状态时允许测试响应能力的请求数为3
+        register-health-indicator: true
+  
+  # 隔离器配置
+  bulkhead:
+    instances:
+      bulkheadService:
+        max-concurrent-calls: 10 # 允许线程并发执行的最大数量为10
+        max-wait-duration: 20ms # 允许线程阻塞的最大等待时间为20ms
+  
+  # 限流器配置
+  ratelimiter:
+    instances:
+      rateLimiterService:
+        limit-refresh-period: 2s # 刷新周期为2秒
+        limit-for-period: 5 # 一个刷新周期内可处理的最大请求数量为5个
+        timeout-duration: 1s # 等待获取许可的超时时间
+
+# 监控端点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+    bulkheads:
+      enabled: true 

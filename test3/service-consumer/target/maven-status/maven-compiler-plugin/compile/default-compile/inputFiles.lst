@@ -1,0 +1,11 @@
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\controller\ConsumerController.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\entity\Product.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\fallback\PriceFeignFallbackFactory.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\fallback\ProductFeignFallbackFactory.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\fallback\SlowProductFeignFallbackFactory.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\fallback\StockFeignFallbackFactory.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\feign\PriceFeignClient.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\feign\ProductFeignClient.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\feign\SlowProductFeignClient.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\feign\StockFeignClient.java
+E:\software_service_engineering\test3\service-consumer\src\main\java\com\example\serviceconsumer\ServiceConsumerApplication.java
