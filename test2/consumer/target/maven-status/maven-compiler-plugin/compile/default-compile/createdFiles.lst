@@ -1,0 +1,9 @@
+com\example\consumer\controller\HelloController.class
+com\example\consumer\controller\UserController.class
+com\example\consumer\config\CustomLoadBalancerConfig.class
+com\example\consumer\config\RandomLoadBalancerConfig.class
+com\example\consumer\ConsumerApplication.class
+com\example\consumer\config\CustomLoadBalancer.class
+com\example\consumer\config\RestTemplateConfig.class
+com\example\consumer\feign\UserFeignClient.class
+com\example\consumer\controller\LoadBalancerDemoController.class
