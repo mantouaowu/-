@@ -1,0 +1,4 @@
+org\example\consumer2\feign\Provider1Service.class
+org\example\consumer2\controller\ConsumerController.class
+org\example\consumer2\ServiceConsumer2Application.class
+org\example\consumer2\feign\Provider2Service.class
